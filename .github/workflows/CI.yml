@@ -1,27 +1,52 @@
-# workflow name and on push do some jobs
-name : Testing
-on : push
+# # workflow name and on push do some jobs
+# name : Testing
+# on : push
 
-# every workflow consist of some jobs
-#jobs -> (What tasks should happen anytime i try to push to a repository)
-# test_project is my job name
-# actions/checkout@v2 -> github writes this code helps you checkout your code on a Virtual Machine which in this case is ubuntu a linux VM(able to access my code to be able to run it)
+# # every workflow consist of some jobs
+# #jobs -> (What tasks should happen anytime i try to push to a repository)
+# # test_project is my job name
+# # actions/checkout@v2 -> github writes this code helps you checkout your code on a Virtual Machine which in this case is ubuntu a linux VM(able to access my code to be able to run it)
+
+# jobs:
+#   test_project:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@v2
+
+#     - name: Set up Python
+#       uses: actions/setup-python@v2
+#       with:
+#         python-version: '3.x'
+    
+#     - name: Run Django Unit Tests
+#       run:
+#         pip install --user django
+#         python manage.py test
+        
+
+name: Testing
+
+on: 
+  push: # Trigger the workflow on a push to the repository
 
 jobs:
   test_project:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Use the latest version of Ubuntu as the VM
+
     steps:
+    # Step 1: Checkout the code
     - uses: actions/checkout@v2
 
+    # Step 2: Set up Python and install dependencies
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.x'
-    
-    - name: Run Django Unit Tests
-      run:
-        pip install --user django
+        python-version: '3.x' # Specify the Python version (e.g., 3.8, 3.9)
+
+    # Step 3: Install Django and run Django unit tests
+    - name: Install Django and Run Tests
+      run: |
+        pip3 install --user django
         python manage.py test
-        
 
 
