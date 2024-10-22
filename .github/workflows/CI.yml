@@ -5,7 +5,7 @@ on : push
 # every workflow consist of some jobs
 #jobs -> (What tasks should happen anytime i try to push to a repository)
 # test_project is my job name
-# actions/checkout@v2 -> github writes this code helps you checkout your code on a Virtual Machine which in this case is ubuntu a linux VM
+# actions/checkout@v2 -> github writes this code helps you checkout your code on a Virtual Machine which in this case is ubuntu a linux VM(able to access my code to be able to run it)
 
 jobs:
   test_project:
@@ -15,7 +15,7 @@ jobs:
     - name: Run Django Unit Tests
       run:
         pip3 install --user django
-        python3 manage.py test
+        python manage.py test
         
 
 
